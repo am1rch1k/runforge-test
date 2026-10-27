@@ -1,0 +1,27 @@
+.badge {
+  text-transform: capitalize;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.queued {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.succeeded {
+  background-color: #36cc18;
+  color: #1d3803;
+}
+
+.failed {
+  background-color: #ec0b0b;
+  color: #420404;
+}
+
+.running {
+  background-color: #1815be;
+  color: #5b33eb;
+}
