@@ -17,6 +17,6 @@ export const getRuns = (): Promise<Run[]> => {
   return new Promise((res) => {
     setTimeout(() => {
       res(mockRuns);
-    }, 2000);
+    }, 600);
   });
 };

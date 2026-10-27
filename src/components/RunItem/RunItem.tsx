@@ -12,7 +12,7 @@ interface RunItemProps {
 
 const RunItem = ({ run, onSelectedRun }: RunItemProps) => {
   return (
-    <li onClick={() => onSelectedRun(run.id)}>
+    <li>
       <div className={styles.item}>
         <div className={styles.runInfo}>
           <h2 className={styles.name}>{run.name}</h2>
