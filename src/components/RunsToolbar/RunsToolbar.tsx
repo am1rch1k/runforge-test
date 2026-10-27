@@ -17,6 +17,7 @@ const RunsToolbar = ({
   return (
     <div className={styles.toolbar}>
       <input
+        placeholder="Search run..."
         className={styles.input}
         type="search"
         aria-label="Search runs"

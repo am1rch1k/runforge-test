@@ -7,21 +7,21 @@
 }
 
 .queued {
-  background-color: #e5e7eb;
-  color: #374151;
+  background-color: #717478;
+  color: #fff;
 }
 
 .succeeded {
   background-color: #36cc18;
-  color: #1d3803;
+  color: #fff;
 }
 
 .failed {
   background-color: #ec0b0b;
-  color: #420404;
+  color: #fff;
 }
 
 .running {
   background-color: #1815be;
-  color: #5b33eb;
+  color: #fff;
 }

@@ -10,7 +10,6 @@ const App = () => {
         <span>WORKSPACE / DEMO</span>
       </header>
       <main className={styles.main}>
-        <h2>Runs</h2>
         <RunsPage />
       </main>
     </>

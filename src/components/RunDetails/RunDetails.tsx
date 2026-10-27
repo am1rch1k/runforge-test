@@ -1,6 +1,7 @@
 import formatDate from "../../utils/formatDate";
 import formatDuration from "../../utils/formatDuration";
 import StatusBadge from "../StatusBadge/StatusBadge";
+import styles from "./RunDetails.module.css";
 
 import type { Run } from "../../types/run";
 
@@ -11,28 +12,62 @@ interface RunDetailsProps {
 
 const RunDetails = ({ run, onBack }: RunDetailsProps) => {
   const logs = run.logs.map((log: string, index: number) => {
-    return <li key={index}>{log}</li>;
+    return (
+      <li key={index} className={styles.logItem}>
+        {log}
+      </li>
+    );
   });
   return (
     <>
-      <h1>{run.name}</h1>
-      <h2>Status:</h2>
-      <StatusBadge status={run.status} />
-      <p>Repository: {run.repository}</p>
-      <p>Branch: {run.branch}</p>
-      <p>Created: {formatDate(run.createdAt)}</p>
-      <p>
-        Duration:{" "}
-        {run.durationSeconds !== undefined
-          ? formatDuration(run.durationSeconds)
-          : "Not available"}
-      </p>
-      <h2>Logs:</h2>
-      <ul>{logs}</ul>
-      <h2>Result: </h2> <p>{run.result ?? "no result yet"}</p>
-      <button type="button" onClick={() => onBack()}>
+      <button
+        type="button"
+        onClick={() => onBack()}
+        className={styles.backButton}
+      >
+        <span aria-hidden="true" className={styles.arrow}>
+          ←
+        </span>
         Back to runs
       </button>
+      <div className={styles.details}>
+        <div className={styles.heading}>
+          <h1 className={styles.title}>{run.name}</h1>
+          <StatusBadge status={run.status} />
+        </div>
+        <dl className={styles.meta}>
+          <div className={styles.metaItem}>
+            <dt className={styles.metaLabel}>Repository</dt>
+            <dd className={styles.metaValue}>{run.repository}</dd>
+          </div>
+          <div className={styles.metaItem}>
+            <dt className={styles.metaLabel}>Branch</dt>
+            <dd className={styles.metaValue}>{run.branch}</dd>
+          </div>
+          <div className={styles.metaItem}>
+            <dt className={styles.metaLabel}>Created</dt>
+            <dd className={styles.metaValue}>{formatDate(run.createdAt)}</dd>
+          </div>
+          <div className={styles.metaItem}>
+            <dt className={styles.metaLabel}>Duration</dt>
+            <dd className={styles.metaValue}>
+              {run.durationSeconds !== undefined
+                ? formatDuration(run.durationSeconds)
+                : "Not available"}
+            </dd>
+          </div>
+        </dl>
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>Logs:</h2>
+          <ul className={styles.logs}>{logs}</ul>
+        </section>
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>Result: </h2>
+          <div className={styles.result}>
+            <p>{run.result ?? "no result yet"}</p>
+          </div>
+        </section>
+      </div>
     </>
   );
 };

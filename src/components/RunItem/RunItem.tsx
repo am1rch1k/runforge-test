@@ -12,25 +12,33 @@ interface RunItemProps {
 
 const RunItem = ({ run, onSelectedRun }: RunItemProps) => {
   return (
-    <li className={styles.item}>
-      <div className={styles.runMeta}>
-        <StatusBadge status={run.status} />
-        <p className={styles.secondary}>{formatDate(run.createdAt)}</p>
-        <p className={styles.secondary}>
-          {run.durationSeconds !== undefined
-            ? formatDuration(run.durationSeconds)
-            : "—"}
-        </p>
-      </div>
+    <li onClick={() => onSelectedRun(run.id)}>
+      <div className={styles.item}>
+        <div className={styles.runInfo}>
+          <h2 className={styles.name}>{run.name}</h2>
+          <p className={styles.secondary}>{run.repository}</p>
+          <p className={styles.secondary}>{run.branch}</p>
+        </div>
 
-      <div className={styles.actions}>
-        <button
-          type="button"
-          className={styles.detailsButton}
-          onClick={() => onSelectedRun(run.id)}
-        >
-          View details
-        </button>
+        <div className={styles.runMeta}>
+          <StatusBadge status={run.status} />
+          <p className={styles.secondary}>{formatDate(run.createdAt)}</p>
+          <p className={styles.secondary}>
+            {run.durationSeconds !== undefined
+              ? formatDuration(run.durationSeconds)
+              : "—"}
+          </p>
+        </div>
+
+        <div className={styles.actions}>
+          <button
+            type="button"
+            className={styles.detailsButton}
+            onClick={() => onSelectedRun(run.id)}
+          >
+            View details
+          </button>
+        </div>
       </div>
     </li>
   );

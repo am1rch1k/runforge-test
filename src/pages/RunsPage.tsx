@@ -3,6 +3,7 @@ import { getRuns } from "../services/runService";
 import RunsList from "../components/RunsList/RunsList";
 import RunsToolbar from "../components/RunsToolbar/RunsToolbar";
 import RunDetails from "../components/RunDetails/RunDetails";
+import styles from "./RunsPage.module.css";
 
 import type { Run, RunStatus } from "../types/run";
 
@@ -86,6 +87,7 @@ const RunsPage = () => {
 
   return (
     <>
+      <h2>Runs</h2>
       <RunsToolbar
         handleChange={handleChange}
         searchQuery={searchQuery}
@@ -93,11 +95,13 @@ const RunsPage = () => {
         onStatusChange={onStatusChange}
       />
       {filteredRuns.length === 0 ? (
-        <>
+        <div className={styles.emptyState}>
           <h2>No runs found</h2>
           <p>No runs match your search or filters.</p>
-          <button onClick={() => resetFilters()}>Reset filters</button>
-        </>
+          <button className={styles.resetButton} onClick={() => resetFilters()}>
+            Reset filters
+          </button>
+        </div>
       ) : (
         <>
           <RunsList runs={filteredRuns} onSelectedRun={onSelectedRun} />
