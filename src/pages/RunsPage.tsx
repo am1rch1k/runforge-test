@@ -17,16 +17,27 @@ const RunsPage = () => {
   const [selectedRunId, setSelectedRunId] = useState<string | null>(null);
 
   useEffect(() => {
+    let ignore = false;
     getRuns()
       .then((newRuns) => {
-        setRuns(newRuns);
+        if (!ignore) {
+          setRuns(newRuns);
+        }
       })
       .catch((err: unknown) => {
-        setError(err instanceof Error ? err.message : "Something went wrong");
+        if (!ignore) {
+          setError(err instanceof Error ? err.message : "Something went wrong");
+        }
       })
       .finally(() => {
-        setIsLoading(false);
+        if (!ignore) {
+          setIsLoading(false);
+        }
       });
+
+    return () => {
+      ignore = true;
+    };
   }, [retryCount]);
 
   const onBack = () => {
@@ -68,14 +79,21 @@ const RunsPage = () => {
   };
 
   if (isLoading) {
-    return <p>Loading runs...</p>;
+    return (
+      <div className={styles.loading} role="status" aria-live="polite">
+        <span className={styles.spinner} aria-hidden="true" />
+        <p>Loading runs...</p>
+      </div>
+    );
   }
 
   if (error) {
     return (
       <>
-        <p>{error}</p>
-        <button onClick={handleRetry}>Retry</button>
+        <h1>{error}</h1>
+        <button className={styles.resetButton} onClick={handleRetry}>
+          Retry
+        </button>
       </>
     );
   }

@@ -1,75 +1,95 @@
-# React + TypeScript + Vite
+# Runforge Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Веб-приложение для просмотра и отслеживания запусков AI-агентов. Техническое задание на позицию Junior Frontend Developer в Runforge.
 
-Currently, two official plugins are available:
+Приложение позволяет просматривать список запусков, фильтровать их по статусу, искать по названию или репозиторию, а также изучать подробную информацию о каждом запуске.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Демо
 
-## React Compiler
+Приложение развёрнуто на Vercel и доступно по ссылке:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**[Открыть Runforge Dashboard](https://runforge-test-pearl.vercel.app/)**
 
-## Expanding the ESLint configuration
+Для демонстрации используются локальные mock-данные.
+Backend и авторизация не требуются.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Технологии
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **React**
+- **TypeScript**
+- **Vite**
+- **CSS Modules**
+- **Vitest**
+- **React Testing Library**
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Функциональность
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Отображение списка запусков AI-агентов.
+- Фильтрация по статусам: `Queued`, `Running`, `Succeeded`, `Failed`.
+- Поиск по названию запуска и репозиторию.
+- Совместная работа поиска и фильтрации.
+- Просмотр подробностей запуска: репозиторий, ветка, статус, дата создания, длительность, логи и результат.
+- Обработка состояний загрузки, ошибки и пустого списка.
+- Повторная загрузка данных при возникновении ошибки.
+- Сброс поискового запроса и фильтров.
+- Адаптивный интерфейс для мобильных устройств и компьютеров.
 
+## Запуск проекта
+
+Для запуска необходим установленный Node.js и npm.
+
+**1. Установить зависимости:**
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+**2. Запустить сервер разработки:**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm run dev
 ```
+
+После запуска открыть в браузере адрес, указанный Vite в терминале.
+
+## Тестирование
+
+Для тестирования используются Vitest и React Testing Library.
+
+Реализованы тесты для проверки:
+
+- Отображения подробной информации о запуске.
+- Фильтрации запусков по статусу.
+- Поиска запусков.
+- Открытия подробностей запуска и возврата к списку.
+
+Запуск тестов:
+
+```bash
+npm run test -- --run
+```
+
+## Структура проекта
+
+```text
+src/
+├── components/  # Переиспользуемые React-компоненты
+├── pages/       # Страницы приложения
+├── services/    # Сервис получения данных
+├── data/        # Тестовые данные запусков
+├── types/       # TypeScript-типы
+├── utils/       # Вспомогательные функции
+└── test/        # Настройка тестового окружения
+```
+
+## Работа с данными
+
+Приложение не требует настоящего backend-сервера.
+
+Для получения данных используется локальный mock-сервис, возвращающий Promise с искусственной задержкой. Это позволяет имитировать асинхронную загрузку и обрабатывать состояния загрузки и ошибки.
+
+## Использование AI
+
+В процессе разработки использовался ChatGPT в качестве code-reviewer и тимлида.
+
+Подробности использования AI, примеры запросов и исправленные ошибки описаны в файле [AI_LOG.md](./AI_LOG.md).
